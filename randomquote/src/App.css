@@ -8,6 +8,7 @@
   border: none;
   cursor: pointer;
   background-color: black;
+  transition: background-color 0.3s linear;
   border-radius: 6px;
   padding: 0.625rem 0.9375rem;
   margin-top: 0.625rem;

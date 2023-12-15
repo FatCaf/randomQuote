@@ -21,11 +21,9 @@ function QuoteBlock() {
   }, [quotes]);
 
   const handleCopyToClipboard = useCallback(() => {
-    // Check if there's a selected quote
     if (selectedQuote) {
-      // Use the Clipboard API to copy the quote to the clipboard
       navigator.clipboard.writeText(selectedQuote.quote);
-      // You can optionally provide user feedback here, e.g., a tooltip or notification
+
       alert('Quote copied to clipboard!');
     }
   }, [selectedQuote]);
@@ -45,43 +43,38 @@ function QuoteBlock() {
   }, [handleButtonClick]);
 
   useEffect(() => {
-    // Add event listener after the initial render
     const button = document.querySelector('.new__quote');
     button?.addEventListener('click', handleButtonClick);
 
-    // Clean up event listener on component unmount
     return () => {
       button?.removeEventListener('click', handleButtonClick);
     };
   }, [handleButtonClick, quotes]);
 
+  document.body.style.backgroundColor = backgroundColor;
   return (
-    <div className="wrapper" style={{ backgroundColor }}>
-      <div className="container">
-        <div className="quote__row">
-          <div className="quote__block">
-            <div className="quote__text">
-              <p style={{ color: backgroundColor }}>
-                <span
-                  style={{ color: backgroundColor }}
-                  className="quotation__marks"
-                >
-                  "
-                </span>
-                {selectedQuote?.quote}
-              </p>
-            </div>
-            <div className="quote__author">
-              <p style={{ color: backgroundColor }}>
-                - {selectedQuote?.author}
-              </p>
-            </div>
-            <button className="new__quote" style={{ backgroundColor }}>
-              Наступна цитата
-            </button>
-            <div className="copy__quote" onClick={handleCopyToClipboard}>
-              <img src={copySvg} alt="copy" />
-            </div>
+    <div className="container">
+      <div className="quote__row">
+        <div className="quote__block">
+          <div className="quote__text">
+            <p style={{ color: backgroundColor }}>
+              <span
+                style={{ color: backgroundColor }}
+                className="quotation__marks"
+              >
+                "
+              </span>
+              {selectedQuote?.quote}
+            </p>
+          </div>
+          <div className="quote__author">
+            <p style={{ color: backgroundColor }}>- {selectedQuote?.author}</p>
+          </div>
+          <button className="new__quote" style={{ backgroundColor }}>
+            Наступна цитата
+          </button>
+          <div className="copy__quote" onClick={handleCopyToClipboard}>
+            <img src={copySvg} alt="copy" />
           </div>
         </div>
       </div>
